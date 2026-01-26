@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài tập Quản lý Sản phẩm - NNPTUD-C4</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #0f172a;
+            min-height: 100vh;
+            padding: 30px;
+            color: #e5e7eb;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 24px;
+            animation: fadeIn 0.8s ease;
+        }
+
+        /* ===== LEFT PANEL ===== */
+        .panel {
+            background: #020617;
+            border-radius: 14px;
+            padding: 24px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: #38bdf8;
+        }
+
+        .subtitle {
+            color: #94a3b8;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #06b6d4, #3b82f6);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(59,130,246,0.4);
+        }
+
+        /* ===== RIGHT PANEL ===== */
+        .output-wrapper {
+            background: #020617;
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .output-title {
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+            color: #22d3ee;
+        }
+
+        .output {
+            background: #020617;
+            border: 1px solid #1e293b;
+            border-radius: 10px;
+            padding: 16px;
+            font-family: Consolas, monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            overflow-y: auto;
+            flex: 1;
+            color: #e5e7eb;
+        }
+
+        .output::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .output::-webkit-scrollbar-thumb {
+            background: #38bdf8;
+            border-radius: 4px;
+        }
+
+        /* ===== ANIMATION ===== */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <!-- LEFT -->
+        <div class="panel">
+            <h1>📦 Quản lý Sản phẩm</h1>
+            <p class="subtitle">
+                Môn NNPTUD-C4<br>
+                JavaScript – Constructor Function<br>
+                Array Methods & Loop
+            </p>
+
+            <button class="btn" onclick="runExercises()">▶ Chạy bài tập</button>
+        </div>
+
+        <!-- RIGHT -->
+        <div class="output-wrapper">
+            <div class="output-title">📄 Kết quả thực thi</div>
+            <div id="output" class="output">
+                Nhấn "Chạy bài tập" để xem kết quả...
+            </div>
+        </div>
+
+    </div>
+
+    <script src="bai-tap-san-pham.js"></script>
+    <script>
+        const originalLog = console.log;
+        let outputContent = '';
+
+        console.log = function (...args) {
+            originalLog.apply(console, args);
+            outputContent += args.join(' ') + '\n';
+            document.getElementById('output').textContent = outputContent;
+        };
+
+        function runExercises() {
+            outputContent = '';
+            document.getElementById('output').textContent = 'Đang chạy...\n\n';
+
+            if (typeof runAllExercises === 'function') {
+                runAllExercises();
+            }
+        }
+
+        window.addEventListener('load', () => {
+            setTimeout(runExercises, 100);
+        });
+    </script>
+</body>
+</html>
